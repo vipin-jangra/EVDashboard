@@ -5,12 +5,12 @@ import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Toolti
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const VehicleCountByYear = ({ data }) => {
-  const minYear = 2011; // Set minimum year
+  const minYear = 2011; 
 
-  // Prepare data for the bar chart
+ 
   const filteredData = data.filter(vehicle => {
     const year = vehicle["Model Year"];
-    return year && year >= minYear; // Filter out vehicles without a Model Year and those before minYear
+    return year && year >= minYear; 
   });
 
   const vehicleCountByYear = filteredData.reduce((acc, vehicle) => {
@@ -19,13 +19,10 @@ const VehicleCountByYear = ({ data }) => {
     return acc;
   }, {});
 
-  // Create arrays for labels and counts
-  const labels = Object.keys(vehicleCountByYear).sort(); // Sort labels to ensure correct year order
-  const counts = labels.map(year => vehicleCountByYear[year]); // Align counts with sorted labels
+  
+  const labels = Object.keys(vehicleCountByYear).sort(); 
+  const counts = labels.map(year => vehicleCountByYear[year]); 
 
-  // Find max number of vehicles and corresponding year
-  const maxCount = Math.max(...counts);
-  const maxYear = labels[counts.indexOf(maxCount)];
 
   const chartData = {
     labels: labels,
@@ -51,7 +48,7 @@ const VehicleCountByYear = ({ data }) => {
     scales: {
       x: {
         grid: {
-          display: false, // Disable grid lines for the x-axis
+          display: false, 
         },
       },
     },

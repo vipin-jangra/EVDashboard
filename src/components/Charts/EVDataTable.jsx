@@ -3,12 +3,12 @@ import React, { useState } from 'react';
 const EVDataTable = ({ data }) => {
   const [filterText, setFilterText] = useState('');
   const [expandedRows, setExpandedRows] = useState({});
-  const [loadingRows, setLoadingRows] = useState({}); // State for loading indicators
+  const [loadingRows, setLoadingRows] = useState({}); 
 
-  // Group vehicles by Make, ensuring Make is defined
+  
   const groupedData = data.reduce((acc, vehicle) => {
     const make = vehicle.Make;
-    if (make) { // Only include vehicles with a valid Make
+    if (make) { 
       if (!acc[make]) {
         acc[make] = [];
       }
@@ -18,25 +18,25 @@ const EVDataTable = ({ data }) => {
   }, {});
 
   const handleToggle = (make) => {
-    // If the row is already expanded, close it; otherwise, open it
+    
     setExpandedRows((prev) => ({
       ...prev,
       [make]: !prev[make],
     }));
 
-    // Set loading state for this make
+   
     setLoadingRows((prev) => ({
       ...prev,
       [make]: true,
     }));
 
-    // Simulate a data fetching delay (e.g., for demonstration purposes)
+    
     setTimeout(() => {
       setLoadingRows((prev) => ({
         ...prev,
         [make]: false,
       }));
-    }, 1000); // Adjust the time as needed
+    }, 1000); 
   };
 
   const filteredGroupedData = Object.entries(groupedData).filter(([make]) =>
@@ -52,7 +52,7 @@ const EVDataTable = ({ data }) => {
         onChange={(e) => setFilterText(e.target.value)}
         className="mb-4 p-2 border border-gray-300 rounded"
       />
-      <div className="overflow-x-auto max-h-72"> {/* Make outer table scrollable */}
+      <div className="overflow-x-auto max-h-72">
         <table className="min-w-full border border-gray-300">
           <thead>
             <tr className="bg-gray-100">
@@ -70,11 +70,11 @@ const EVDataTable = ({ data }) => {
                 <React.Fragment key={make}>
                   <tr onClick={() => handleToggle(make)} className="cursor-pointer">
                     <td className="border px-4 py-2 flex items-center">
-                      {/* Arrow indicator */}
+                      
                       {expandedRows[make] ? (
-                        <span className="mr-2">&#9650;</span> // Up Arrow
+                        <span className="mr-2">&#9650;</span> 
                       ) : (
-                        <span className="mr-2">&#9660;</span> // Down Arrow
+                        <span className="mr-2">&#9660;</span> 
                       )}
                       {make}
                     </td>
@@ -85,7 +85,7 @@ const EVDataTable = ({ data }) => {
                       <td colSpan={2}>
                         <div className="overflow-y-auto max-h-64 border-t">
                           {loadingRows[make] ? (
-                            <div className="text-center py-4">Loading...</div> // Loading state
+                            <div className="text-center py-4">Loading...</div> 
                           ) : (
                             <table className="min-w-full border border-gray-300">
                               <thead>
@@ -99,7 +99,7 @@ const EVDataTable = ({ data }) => {
                               </thead>
                               <tbody>
                                 {vehicles.map((vehicle, index) => {
-                                  // Check if vehicle is defined and has necessary fields
+                                  
                                   if (vehicle && vehicle['VIN (1-10)'] && vehicle.County) {
                                     return (
                                       <tr key={index} className="border-b hover:bg-gray-50">
@@ -111,7 +111,7 @@ const EVDataTable = ({ data }) => {
                                       </tr>
                                     );
                                   }
-                                  return null; // If vehicle is not valid, return null
+                                  return null; 
                                 })}
                               </tbody>
                             </table>
