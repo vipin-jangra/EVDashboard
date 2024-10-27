@@ -1,24 +1,19 @@
-import logo from './logo.svg';
+
 import './App.css';
+import { CSVDataProvider } from './context/CSVDataContext';
+import Dashboard from './components/Dashboard';
+
+// Reference to the CSV file in the public directory
+const csvData = "/data/Electric_Vehicle_Population_Data.csv";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+    <CSVDataProvider url={csvData}>
+      <div className="App">
+        <Dashboard />
+      </div>
+    </CSVDataProvider>
   );
 }
 
