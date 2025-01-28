@@ -12,7 +12,9 @@ const Dashboard = () => {
   const [selectedMake, setSelectedMake] = useState('');
 
   if (loading) {
-    return <div className="text-center">Loading, please wait...</div>;
+
+    return <div className="text-center">Loading please wait...</div>;
+
   }
 
   if (error) {
